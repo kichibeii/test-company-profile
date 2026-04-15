@@ -1,1513 +1,648 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lex Master Academy — PKPA Peradi Resmi</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --blue:#4152A3;--blue-dark:#2f3d82;--blue-light:#5566bb;
+      --blue-pale:#eef0fb;--blue-pale2:#d8dcf5;
+      --yellow:#F8C826;--yellow-dark:#d9a800;--yellow-pale:#fef9e7;
+      --white:#fff;--off:#FAFAF8;--cream:#F5F3EE;
+      --gray-100:#F3F4F6;--gray-200:#E5E7EB;--gray-400:#9CA3AF;
+      --gray-600:#6B7280;--gray-800:#374151;--text:#111827;
+      --font:'Plus Jakarta Sans',system-ui,sans-serif;
+      --sh-sm:0 2px 10px rgba(65,82,163,.08);
+      --sh-md:0 8px 28px rgba(65,82,163,.13);
+      --sh-lg:0 20px 56px rgba(65,82,163,.16);
+      --r:8px;--r-lg:14px;--t:.25s ease
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font);color:var(--text);background:var(--white);line-height:1.65}
+    .container{max-width:1140px;margin:0 auto;padding:0 24px}
+    .tag{display:inline-flex;align-items:center;gap:6px;background:var(--blue-pale);color:var(--blue);font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:40px;margin-bottom:14px}
+    .tag.light{background:rgba(248,200,38,.15);color:var(--yellow)}
+    .h2{font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;color:var(--text);line-height:1.2;margin-bottom:14px}
+    .h2.light{color:var(--white)}
+    .sub{font-size:1rem;color:var(--gray-600);line-height:1.75;max-width:540px}
+    .sub.light{color:rgba(255,255,255,.65)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 28px;border-radius:var(--r);font-family:var(--font);font-weight:700;font-size:.9rem;cursor:pointer;border:none;text-decoration:none;transition:var(--t)}
+    .btn-yellow{background:var(--yellow);color:var(--blue-dark)}
+    .btn-yellow:hover{background:var(--yellow-dark);transform:translateY(-2px);box-shadow:0 6px 20px rgba(248,200,38,.4)}
+    .btn-outline-white{background:transparent;border:2px solid rgba(255,255,255,.4);color:#fff}
+    .btn-outline-white:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.7)}
+    .btn-blue{background:var(--blue);color:#fff}
+    .btn-blue:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:var(--sh-md)}
+    .btn-sm{padding:9px 20px;font-size:.82rem}
+    /* fade-in */
+    .fi{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+    .fi.v{opacity:1;transform:translateY(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
 
-    :root {
-      --navy: #1B2A4A;
-      --navy-dark: #111d33;
-      --navy-light: #253756;
-      --gold: #C9A84C;
-      --gold-light: #dfc06e;
-      --gold-pale: #f5edda;
-      --white: #ffffff;
-      --off-white: #FAFAF8;
-      --gray-100: #F4F4F0;
-      --gray-200: #E8E6DF;
-      --gray-500: #8A8778;
-      --gray-700: #4A4840;
-      --text: #2C2A24;
-      --font-heading: 'Playfair Display', Georgia, serif;
-      --font-body: 'Inter', system-ui, sans-serif;
-      --shadow-sm: 0 2px 8px rgba(27,42,74,0.08);
-      --shadow-md: 0 8px 32px rgba(27,42,74,0.12);
-      --shadow-lg: 0 16px 48px rgba(27,42,74,0.16);
-      --radius: 4px;
-      --radius-md: 8px;
-      --transition: 0.3s ease;
-    }
+    /* NAVBAR */
+    #nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;transition:background .35s,box-shadow .35s,padding .3s}
+    #nav.sc{background:var(--blue-dark);box-shadow:0 2px 20px rgba(0,0,0,.25);padding:10px 0}
+    .nw{display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo-icon{width:36px;height:36px;background:var(--yellow);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+    .logo-icon img{width:100%;height:100%;object-fit:contain}
+    .logo-text{font-size:1rem;font-weight:800;color:#fff;line-height:1.2}
+    .logo-sub{font-size:.62rem;color:rgba(255,255,255,.6);letter-spacing:.06em;text-transform:uppercase}
+    .nlinks{display:flex;align-items:center;gap:4px;list-style:none}
+    .nlinks a{display:block;padding:7px 13px;border-radius:var(--r);font-size:.85rem;font-weight:600;color:rgba(255,255,255,.75);text-decoration:none;transition:var(--t)}
+    .nlinks a:hover{color:#fff;background:rgba(255,255,255,.1)}
+    .hbg{display:none;flex-direction:column;gap:5px;cursor:pointer}
+    .hbg span{width:22px;height:2px;background:#fff;border-radius:2px;transition:var(--t)}
+    /* mobile menu */
+    .mob{display:none;position:fixed;inset:0;background:var(--blue-dark);z-index:1001;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+    .mob.open{display:flex}
+    .mob a{display:block;width:100%;max-width:280px;padding:14px 20px;text-align:center;color:rgba(255,255,255,.85);text-decoration:none;font-weight:700;font-size:1.05rem;border-radius:var(--r);transition:var(--t)}
+    .mob a:hover{background:rgba(255,255,255,.08);color:#fff}
+    .mob-x{position:absolute;top:24px;right:24px;background:none;border:none;color:#fff;font-size:1.6rem;cursor:pointer}
 
-    html { scroll-behavior: smooth; font-size: 16px; }
+    /* HERO */
+    #hero{background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 60%,#5a6ecc 100%);min-height:100vh;display:flex;align-items:center;padding:110px 0 80px;position:relative;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,transparent,transparent 80px,rgba(255,255,255,.025) 80px,rgba(255,255,255,.025) 81px);pointer-events:none}
+    .hero-circle{position:absolute;right:-120px;top:50%;transform:translateY(-50%);width:580px;height:580px;border-radius:50%;border:1px solid rgba(255,255,255,.07);pointer-events:none}
+    .hero-circle::before{content:'';position:absolute;inset:50px;border-radius:50%;border:1px solid rgba(248,200,38,.08)}
+    .hgrid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;position:relative}
+    .heye{display:inline-flex;align-items:center;gap:8px;background:rgba(248,200,38,.15);border:1px solid rgba(248,200,38,.3);color:var(--yellow);font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:6px 16px;border-radius:40px;margin-bottom:22px}
+    .htitle{font-size:clamp(2rem,4.5vw,3.5rem);font-weight:900;color:#fff;line-height:1.12;margin-bottom:20px}
+    .htitle span{color:var(--yellow)}
+    .hsub{font-size:1rem;color:rgba(255,255,255,.7);line-height:1.8;margin-bottom:34px;max-width:500px}
+    .hbtns{display:flex;gap:12px;flex-wrap:wrap}
+    .hproof{display:flex;gap:32px;margin-top:40px;padding-top:32px;border-top:1px solid rgba(255,255,255,.1);flex-wrap:wrap}
+    .hstat-n{font-size:1.8rem;font-weight:900;color:var(--yellow);line-height:1}
+    .hstat-l{font-size:.75rem;color:rgba(255,255,255,.5);margin-top:3px}
+    /* hero card */
+    .hcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);padding:28px;backdrop-filter:blur(10px)}
+    .hcard-title{font-size:.68rem;font-weight:800;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+    .hcard-batch{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);padding:16px;margin-bottom:12px}
+    .hcb-name{font-size:.82rem;font-weight:800;color:#fff;margin-bottom:6px}
+    .hcb-meta{font-size:.78rem;color:rgba(255,255,255,.55);display:flex;flex-direction:column;gap:4px}
+    .hcb-price{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.08)}
+    .hcb-price-label{font-size:.65rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em}
+    .hcb-price-val{font-size:1.2rem;font-weight:900;color:var(--yellow)}
+    .hcb-price-sub{font-size:.7rem;color:rgba(255,255,255,.4)}
+    .hcard .btn{width:100%;margin-top:16px}
+    .hcard-note{text-align:center;font-size:.7rem;color:rgba(255,255,255,.3);margin-top:8px}
 
-    body {
-      font-family: var(--font-body);
-      color: var(--text);
-      background: var(--white);
-      line-height: 1.7;
-    }
+    /* WHY */
+    #why{padding:88px 0;background:var(--cream)}
+    .sec-head{text-align:center;margin-bottom:52px}
+    .sec-head .sub{margin:0 auto}
+    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .wcard{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:28px;position:relative;overflow:hidden;transition:var(--t)}
+    .wcard::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--yellow));transform:scaleX(0);transition:transform var(--t)}
+    .wcard:hover{box-shadow:var(--sh-md);transform:translateY(-4px)}
+    .wcard:hover::after{transform:scaleX(1)}
+    .wicon{width:48px;height:48px;background:var(--blue-pale);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:16px}
+    .wcard h3{font-size:.975rem;font-weight:800;color:var(--text);margin-bottom:8px}
+    .wcard p{font-size:.875rem;color:var(--gray-600);line-height:1.7}
 
-    /* ── UTILITY ─────────────────────────────────────────────── */
-    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
-    .section-tag {
-      display: inline-block;
-      font-family: var(--font-body);
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 12px;
-    }
-    .section-title {
-      font-family: var(--font-heading);
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 700;
-      color: var(--navy);
-      line-height: 1.25;
-      margin-bottom: 16px;
-    }
-    .section-title.light { color: var(--white); }
-    .section-subtitle {
-      font-size: 1.05rem;
-      color: var(--gray-500);
-      max-width: 560px;
-      line-height: 1.75;
-    }
-    .section-subtitle.light { color: rgba(255,255,255,0.72); }
-    .gold-rule {
-      width: 56px; height: 2px;
-      background: var(--gold);
-      margin: 20px 0 40px;
-    }
-    .btn {
-      display: inline-block;
-      padding: 14px 32px;
-      border-radius: var(--radius);
-      font-family: var(--font-body);
-      font-weight: 600;
-      font-size: 0.9rem;
-      letter-spacing: 0.04em;
-      cursor: pointer;
-      border: none;
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    .btn-gold {
-      background: var(--gold);
-      color: var(--navy);
-    }
-    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .btn-outline-gold {
-      background: transparent;
-      border: 2px solid var(--gold);
-      color: var(--gold);
-    }
-    .btn-outline-gold:hover { background: var(--gold); color: var(--navy); }
-    .btn-navy {
-      background: var(--navy);
-      color: var(--white);
-    }
-    .btn-navy:hover { background: var(--navy-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    /* CURRICULUM */
+    #curriculum{padding:88px 0;background:var(--blue-dark)}
+    .curr-layout{display:grid;grid-template-columns:1fr 1.8fr;gap:60px;align-items:start}
+    .curr-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(248,200,38,.12);border:1px solid rgba(248,200,38,.25);color:var(--yellow);font-size:.78rem;font-weight:700;padding:8px 16px;border-radius:var(--r);margin-bottom:10px}
+    .curr-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .citem{display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:11px 14px;transition:var(--t)}
+    .citem:hover{background:rgba(248,200,38,.07);border-color:rgba(248,200,38,.2)}
+    .citem.extra{border-color:rgba(248,200,38,.15);background:rgba(248,200,38,.05)}
+    .cn{font-size:.62rem;font-weight:800;color:var(--yellow);opacity:.65;min-width:20px;flex-shrink:0;margin-top:1px}
+    .ct{font-size:.82rem;font-weight:500;color:rgba(255,255,255,.82);line-height:1.4}
+    .cextra-tag{font-size:.6rem;background:rgba(248,200,38,.2);color:var(--yellow);padding:1px 6px;border-radius:4px;margin-left:6px;font-weight:700;white-space:nowrap}
 
-    /* ── FADE-IN ANIMATION ───────────────────────────────────── */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    .fade-in-delay-1 { transition-delay: 0.1s; }
-    .fade-in-delay-2 { transition-delay: 0.2s; }
-    .fade-in-delay-3 { transition-delay: 0.3s; }
-    .fade-in-delay-4 { transition-delay: 0.4s; }
+    /* INSTRUCTORS */
+    #instructors{padding:88px 0;background:var(--white)}
+    .inst-head{text-align:center;margin-bottom:52px}
+    .inst-head .sub{margin:0 auto}
+    .inst-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .icard{border:1px solid var(--gray-200);border-radius:var(--r-lg);overflow:hidden;transition:var(--t)}
+    .icard:hover{box-shadow:var(--sh-md);transform:translateY(-3px)}
+    .icard-top{background:linear-gradient(135deg,var(--blue-dark),var(--blue));padding:20px 16px;display:flex;align-items:center;gap:12px}
+    .iav{width:44px;height:44px;border-radius:50%;background:rgba(248,200,38,.2);border:2px solid rgba(248,200,38,.35);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:800;color:var(--yellow);flex-shrink:0}
+    .iname{font-size:.78rem;font-weight:800;color:#fff;line-height:1.35}
+    .icred{font-size:.65rem;color:rgba(255,255,255,.5);margin-top:2px;line-height:1.3}
+    .ibody{padding:14px 16px}
+    .itag{display:inline-block;background:var(--blue-pale);color:var(--blue-dark);font-size:.65rem;font-weight:700;padding:3px 10px;border-radius:40px}
 
-    /* ── NAVBAR ──────────────────────────────────────────────── */
-    #navbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      background: transparent;
-      transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.3s ease;
-      padding: 20px 0;
-    }
-    #navbar.scrolled {
-      background: var(--navy);
-      box-shadow: 0 2px 24px rgba(0,0,0,0.2);
-      padding: 12px 0;
-    }
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-logo {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: var(--white);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .nav-logo-icon {
-      width: 36px; height: 36px;
-      background: var(--gold);
-      border-radius: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      color: var(--navy);
-      font-weight: 900;
-      flex-shrink: 0;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      list-style: none;
-    }
-    .nav-links a {
-      color: rgba(255,255,255,0.82);
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      transition: color var(--transition);
-    }
-    .nav-links a:hover { color: var(--gold); }
-    .nav-cta { margin-left: 16px; }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .hamburger span {
-      width: 24px; height: 2px;
-      background: var(--white);
-      border-radius: 2px;
-      transition: var(--transition);
-    }
+    /* SCHEDULE */
+    #schedule{padding:88px 0;background:var(--cream)}
+    .shead{text-align:center;margin-bottom:52px}
+    .shead .sub{margin:0 auto}
+    .batch-card{background:var(--white);border:1.5px solid var(--blue);border-radius:var(--r-lg);padding:32px;position:relative;overflow:hidden;max-width:680px;margin:0 auto 28px}
+    .batch-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue),var(--yellow))}
+    .batch-label{font-size:.7rem;font-weight:800;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+    .batch-title{font-size:1.4rem;font-weight:900;color:var(--text);margin-bottom:4px}
+    .batch-period{font-size:.9rem;color:var(--gray-600);margin-bottom:24px}
+    .batch-rows{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+    .brow{display:flex;align-items:flex-start;gap:10px;font-size:.875rem;color:var(--gray-800)}
+    .brow-icon{font-size:.95rem;flex-shrink:0}
+    .platform-box{background:var(--blue-dark);border-radius:var(--r-lg);padding:24px 32px;display:flex;align-items:center;gap:20px;max-width:680px;margin:0 auto}
+    .pb-icon{width:52px;height:52px;background:rgba(248,200,38,.15);border:1px solid rgba(248,200,38,.25);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+    .pb-text h4{font-size:.95rem;font-weight:800;color:#fff;margin-bottom:4px}
+    .pb-text p{font-size:.84rem;color:rgba(255,255,255,.55)}
 
-    /* Mobile menu */
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: var(--navy-dark);
-      z-index: 999;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      color: var(--white);
-      text-decoration: none;
-      font-family: var(--font-heading);
-      font-size: 1.6rem;
-      font-weight: 600;
-      transition: color var(--transition);
-    }
-    .mobile-menu a:hover { color: var(--gold); }
-    .mobile-close {
-      position: absolute;
-      top: 24px; right: 24px;
-      background: none;
-      border: none;
-      color: var(--white);
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
+    /* FEE */
+    #fee{padding:88px 0;background:var(--white)}
+    .fee-layout{display:grid;grid-template-columns:1fr 1.1fr 1.1fr;gap:24px;margin-bottom:28px}
+    .fcard{border-radius:var(--r-lg);overflow:hidden;border:1.5px solid var(--gray-200);transition:var(--t)}
+    .fcard:hover{box-shadow:var(--sh-md)}
+    .fcard.featured{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue-pale2)}
+    .fcard-top{padding:24px;text-align:center;background:var(--gray-100)}
+    .fcard.featured .fcard-top{background:var(--blue);color:#fff}
+    .fcard-badge{font-size:.65rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--yellow);color:var(--blue-dark);padding:3px 10px;border-radius:40px;margin-bottom:10px;display:inline-block}
+    .fcard-name{font-size:.85rem;font-weight:700;color:var(--gray-600);margin-bottom:12px}
+    .fcard.featured .fcard-name{color:rgba(255,255,255,.75)}
+    .fcard-price{display:flex;align-items:baseline;justify-content:center;gap:3px;margin-bottom:4px}
+    .fcard-curr{font-size:.9rem;font-weight:700;color:var(--blue)}
+    .fcard.featured .fcard-curr{color:var(--yellow)}
+    .fcard-amount{font-size:2rem;font-weight:900;color:var(--blue);line-height:1}
+    .fcard.featured .fcard-amount{color:#fff}
+    .fcard-body{padding:20px 24px}
+    .fcard-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:20px}
+    .fcard-item{display:flex;align-items:flex-start;gap:8px;font-size:.85rem;color:var(--gray-600)}
+    .fcard-item-icon{color:var(--blue);font-size:.85rem;flex-shrink:0;margin-top:2px}
+    .fcard-cta{width:100%;justify-content:center}
+    .fee-note-box{background:var(--blue-pale);border:1px solid var(--blue-pale2);border-radius:var(--r);padding:20px 24px;display:flex;gap:14px;align-items:flex-start}
+    .fee-note-icon{font-size:1.1rem;flex-shrink:0}
+    .fee-note-text{font-size:.85rem;color:var(--blue-dark);line-height:1.65}
+    .fee-note-text strong{color:var(--blue)}
 
-    /* ── HERO ────────────────────────────────────────────────── */
-    #hero {
-      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, #22355e 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-      padding: 120px 0 80px;
-    }
-    .hero-bg-pattern {
-      position: absolute;
-      inset: 0;
-      background-image:
-        repeating-linear-gradient(
-          45deg,
-          transparent,
-          transparent 80px,
-          rgba(201,168,76,0.04) 80px,
-          rgba(201,168,76,0.04) 81px
-        );
-      pointer-events: none;
-    }
-    .hero-decor {
-      position: absolute;
-      right: -80px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 560px;
-      height: 560px;
-      border-radius: 50%;
-      border: 1px solid rgba(201,168,76,0.15);
-      pointer-events: none;
-    }
-    .hero-decor::before {
-      content: '';
-      position: absolute;
-      inset: 40px;
-      border-radius: 50%;
-      border: 1px solid rgba(201,168,76,0.08);
-    }
-    .hero-content { position: relative; z-index: 1; max-width: 680px; }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(201,168,76,0.15);
-      border: 1px solid rgba(201,168,76,0.3);
-      color: var(--gold);
-      padding: 6px 16px;
-      border-radius: 40px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-    .hero-badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      background: var(--gold);
-      border-radius: 50%;
-    }
-    .hero-title {
-      font-family: var(--font-heading);
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      font-weight: 900;
-      color: var(--white);
-      line-height: 1.15;
-      margin-bottom: 24px;
-    }
-    .hero-title em {
-      font-style: italic;
-      color: var(--gold);
-    }
-    .hero-sub {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.75);
-      line-height: 1.8;
-      margin-bottom: 40px;
-      max-width: 560px;
-    }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-stats {
-      display: flex;
-      gap: 40px;
-      margin-top: 56px;
-      padding-top: 40px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      flex-wrap: wrap;
-    }
-    .hero-stat-num {
-      font-family: var(--font-heading);
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--gold);
-      line-height: 1;
-    }
-    .hero-stat-label {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.55);
-      margin-top: 4px;
-      letter-spacing: 0.04em;
-    }
+    /* REGISTRATION */
+    #register{padding:88px 0;background:var(--cream)}
+    .reg-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:start}
+    .reg-steps{display:flex;flex-direction:column;gap:18px;margin-top:28px}
+    .rstep{display:flex;align-items:flex-start;gap:14px}
+    .rstep-num{width:34px;height:34px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:800;color:#fff;flex-shrink:0}
+    .rstep-body h4{font-size:.875rem;font-weight:700;color:var(--text);margin-bottom:2px}
+    .rstep-body p{font-size:.82rem;color:var(--gray-600)}
+    .form-box{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:36px;box-shadow:var(--sh-sm)}
+    .form-box h3{font-size:1.15rem;font-weight:800;color:var(--text);margin-bottom:4px}
+    .form-box .form-sub{font-size:.82rem;color:var(--gray-600);margin-bottom:24px}
+    .fg{margin-bottom:16px}
+    .fl{display:block;font-size:.78rem;font-weight:700;color:var(--gray-800);margin-bottom:5px}
+    .fi-in,.fi-sel{width:100%;padding:11px 14px;border:1.5px solid var(--gray-200);border-radius:var(--r);font-family:var(--font);font-size:.9rem;color:var(--text);background:var(--white);outline:none;transition:border-color var(--t),box-shadow var(--t);appearance:none}
+    .fi-in:focus,.fi-sel:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(65,82,163,.1)}
+    .fi-in.e{border-color:#ef4444}
+    .ferr{font-size:.74rem;color:#ef4444;margin-top:3px;display:none}
+    .ferr.show{display:block}
+    .fsel-w{position:relative}
+    .fsel-w::after{content:'▾';position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--gray-400);pointer-events:none}
+    .price-preview{background:var(--blue-pale);border:1px solid var(--blue-pale2);border-radius:var(--r);padding:12px 16px;margin-bottom:16px;font-size:.85rem;color:var(--blue-dark);display:none}
+    .price-preview.show{display:block}
+    .price-preview strong{color:var(--blue);font-size:1rem}
+    .fsub{width:100%;padding:14px;background:var(--blue);color:#fff;border:none;border-radius:var(--r);font-family:var(--font);font-size:.95rem;font-weight:800;cursor:pointer;transition:var(--t);margin-top:4px}
+    .fsub:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:var(--sh-md)}
+    .form-ok{display:none;text-align:center;padding:28px}
+    .form-ok.show{display:block}
+    .form-ok-icon{font-size:2.8rem;margin-bottom:10px}
+    .form-ok h3{font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:6px}
+    .form-ok p{font-size:.875rem;color:var(--gray-600)}
 
-    /* ── WHY CHOOSE US ───────────────────────────────────────── */
-    #why {
-      padding: 96px 0;
-      background: var(--off-white);
-    }
-    .why-header { text-align: center; }
-    .why-header .gold-rule { margin: 20px auto 48px; }
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      margin-top: 8px;
-    }
-    .why-card {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius-md);
-      padding: 36px 28px;
-      position: relative;
-      transition: var(--transition);
-      overflow: hidden;
-    }
-    .why-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transition: transform var(--transition);
-    }
-    .why-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
-    .why-card:hover::before { transform: scaleX(1); }
-    .why-icon {
-      width: 52px; height: 52px;
-      background: var(--gold-pale);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 20px;
-    }
-    .why-card h3 {
-      font-family: var(--font-heading);
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 10px;
-    }
-    .why-card p {
-      font-size: 0.9rem;
-      color: var(--gray-500);
-      line-height: 1.7;
-    }
+    /* FOOTER */
+    #footer{background:var(--blue-dark);padding:56px 0 28px;color:rgba(255,255,255,.5)}
+    .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:44px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:24px}
+    .flogo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px}
+    .flogo-icon{width:34px;height:34px;background:var(--yellow);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+    .flogo-icon img{width:100%;height:100%;object-fit:contain}
+    .flogo-text{font-size:.95rem;font-weight:800;color:#fff}
+    .fabout{font-size:.875rem;line-height:1.75;max-width:280px}
+    .fsocs{display:flex;gap:8px;margin-top:18px}
+    .fsoc{width:36px;height:36px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);text-decoration:none;font-size:.85rem;transition:var(--t)}
+    .fsoc:hover{background:var(--yellow);border-color:var(--yellow);color:var(--blue-dark)}
+    .fcol h4{font-size:.7rem;font-weight:800;color:rgba(255,255,255,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+    .flist{list-style:none;display:flex;flex-direction:column;gap:9px}
+    .flist a{color:rgba(255,255,255,.5);text-decoration:none;font-size:.875rem;transition:var(--t)}
+    .flist a:hover{color:#fff}
+    .fbottom{display:flex;justify-content:space-between;font-size:.75rem;color:rgba(255,255,255,.2);flex-wrap:wrap;gap:8px}
 
-    /* ── CURRICULUM ──────────────────────────────────────────── */
-    #curriculum {
-      padding: 96px 0;
-      background: var(--navy);
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .nlinks,#nav .btn{display:none}.hbg{display:flex}
+      #hero{padding:110px 0 60px}
+      .hgrid{grid-template-columns:1fr}
+      .hcard{display:none}
+      .why-grid{grid-template-columns:1fr}
+      .curr-layout{grid-template-columns:1fr;gap:36px}
+      .curr-grid{grid-template-columns:1fr}
+      .inst-grid{grid-template-columns:repeat(2,1fr)}
+      .platform-box{flex-direction:column;text-align:center}
+      .fee-layout{grid-template-columns:1fr}
+      .reg-layout{grid-template-columns:1fr;gap:36px}
+      .footer-grid{grid-template-columns:1fr;gap:32px}
+      .fbottom{justify-content:center;text-align:center}
     }
-    .curriculum-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.6fr;
-      gap: 64px;
-      align-items: start;
-    }
-    .curriculum-intro .section-title { color: var(--white); }
-    .curriculum-intro .section-subtitle { color: rgba(255,255,255,0.65); }
-    .curriculum-intro .gold-rule { margin-bottom: 28px; }
-    .curriculum-peradi-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(201,168,76,0.12);
-      border: 1px solid rgba(201,168,76,0.25);
-      color: var(--gold);
-      padding: 10px 20px;
-      border-radius: var(--radius);
-      font-size: 0.82rem;
-      font-weight: 600;
-      margin-top: 32px;
-    }
-    .curriculum-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .curr-item {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius);
-      padding: 16px 20px;
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      transition: var(--transition);
-    }
-    .curr-item:hover {
-      background: rgba(201,168,76,0.08);
-      border-color: rgba(201,168,76,0.2);
-    }
-    .curr-num {
-      font-family: var(--font-heading);
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--gold);
-      opacity: 0.7;
-      min-width: 24px;
-      margin-top: 2px;
-    }
-    .curr-text {
-      font-size: 0.875rem;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.5;
-      font-weight: 500;
-    }
-
-    /* ── INSTRUCTORS ─────────────────────────────────────────── */
-    #instructors {
-      padding: 96px 0;
-      background: var(--white);
-    }
-    .instructors-header { text-align: center; margin-bottom: 56px; }
-    .instructors-header .gold-rule { margin: 20px auto 0; }
-    .instructors-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-    .instructor-card {
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      transition: var(--transition);
-    }
-    .instructor-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
-    .instructor-avatar {
-      height: 180px;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-heading);
-      font-size: 3rem;
-      font-weight: 700;
-      color: var(--gold);
-      position: relative;
-      overflow: hidden;
-    }
-    .instructor-avatar::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 40%;
-      background: linear-gradient(to top, rgba(27,42,74,0.5), transparent);
-    }
-    .instructor-body { padding: 24px; }
-    .instructor-name {
-      font-family: var(--font-heading);
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 4px;
-    }
-    .instructor-credential {
-      font-size: 0.8rem;
-      color: var(--gold);
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .instructor-desc {
-      font-size: 0.85rem;
-      color: var(--gray-500);
-      line-height: 1.6;
-    }
-    .instructor-tag {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 4px 12px;
-      background: var(--gold-pale);
-      color: var(--navy);
-      font-size: 0.73rem;
-      font-weight: 600;
-      border-radius: 40px;
-      letter-spacing: 0.04em;
-    }
-
-    /* ── SCHEDULE ────────────────────────────────────────────── */
-    #schedule {
-      padding: 96px 0;
-      background: var(--gray-100);
-    }
-    .schedule-header { text-align: center; margin-bottom: 56px; }
-    .schedule-header .gold-rule { margin: 20px auto 0; }
-    .schedule-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 28px;
-      margin-bottom: 48px;
-    }
-    .batch-card {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius-md);
-      padding: 36px;
-      position: relative;
-      overflow: hidden;
-    }
-    .batch-card.featured {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 1px var(--gold), var(--shadow-md);
-    }
-    .batch-badge {
-      position: absolute;
-      top: 20px; right: 20px;
-      background: var(--gold);
-      color: var(--navy);
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 40px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-    .batch-number {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 8px;
-    }
-    .batch-title {
-      font-family: var(--font-heading);
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 24px;
-    }
-    .batch-details { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .batch-detail {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 0.9rem;
-      color: var(--gray-700);
-    }
-    .batch-detail-icon { color: var(--gold); font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
-    .batch-detail strong { color: var(--navy); }
-    .batch-cta { margin-top: 28px; width: 100%; text-align: center; }
-
-    .platform-info {
-      background: var(--navy);
-      border-radius: var(--radius-md);
-      padding: 36px;
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-    .platform-icon {
-      width: 64px; height: 64px;
-      background: rgba(201,168,76,0.15);
-      border: 1px solid rgba(201,168,76,0.3);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      flex-shrink: 0;
-    }
-    .platform-text h4 {
-      font-family: var(--font-heading);
-      font-size: 1.1rem;
-      color: var(--white);
-      margin-bottom: 6px;
-    }
-    .platform-text p {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.6;
-    }
-
-    /* ── INVESTMENT FEE ──────────────────────────────────────── */
-    #fee {
-      padding: 96px 0;
-      background: var(--white);
-    }
-    .fee-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 64px;
-      align-items: center;
-    }
-    .fee-intro .section-subtitle { margin-bottom: 0; }
-    .fee-card {
-      background: var(--navy);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-    }
-    .fee-card-header {
-      background: var(--gold);
-      padding: 28px 36px;
-      text-align: center;
-    }
-    .fee-card-header h3 {
-      font-family: var(--font-heading);
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--navy);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .fee-amount {
-      font-family: var(--font-heading);
-      font-size: 2.4rem;
-      font-weight: 900;
-      color: var(--navy);
-      line-height: 1;
-    }
-    .fee-amount sub { font-size: 1rem; font-weight: 500; vertical-align: baseline; }
-    .fee-amount .strikethrough {
-      font-size: 1.1rem;
-      font-weight: 400;
-      text-decoration: line-through;
-      opacity: 0.5;
-      display: block;
-      margin-bottom: 4px;
-    }
-    .fee-card-body { padding: 32px 36px; }
-    .fee-includes { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
-    .fee-include {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 0.875rem;
-      color: rgba(255,255,255,0.8);
-    }
-    .fee-include-icon { color: var(--gold); font-size: 1rem; flex-shrink: 0; }
-    .fee-payment-title {
-      font-family: var(--font-heading);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 14px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    .fee-bank {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: var(--radius);
-      padding: 14px 18px;
-      margin-bottom: 10px;
-    }
-    .fee-bank-name { font-size: 0.78rem; color: var(--gold); font-weight: 600; margin-bottom: 2px; }
-    .fee-bank-number { font-size: 1.1rem; font-weight: 700; color: var(--white); letter-spacing: 0.08em; }
-    .fee-bank-holder { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
-    .fee-note {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.4);
-      line-height: 1.6;
-      margin-top: 16px;
-    }
-
-    /* ── REGISTRATION FORM ───────────────────────────────────── */
-    #register {
-      padding: 96px 0;
-      background: var(--off-white);
-    }
-    .register-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 64px;
-      align-items: center;
-    }
-    .register-intro { }
-    .register-perks { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
-    .register-perk {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 0.9rem;
-      color: var(--gray-700);
-    }
-    .register-perk-icon {
-      width: 28px; height: 28px;
-      background: var(--gold-pale);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.85rem;
-      flex-shrink: 0;
-      color: var(--gold);
-    }
-    .form-card {
-      background: var(--white);
-      border: 1px solid var(--gray-200);
-      border-radius: var(--radius-md);
-      padding: 40px;
-      box-shadow: var(--shadow-sm);
-    }
-    .form-title {
-      font-family: var(--font-heading);
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 28px;
-    }
-    .form-group { margin-bottom: 20px; }
-    .form-label {
-      display: block;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 6px;
-      letter-spacing: 0.02em;
-    }
-    .form-input, .form-select {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1.5px solid var(--gray-200);
-      border-radius: var(--radius);
-      font-family: var(--font-body);
-      font-size: 0.9rem;
-      color: var(--text);
-      background: var(--white);
-      outline: none;
-      transition: border-color var(--transition), box-shadow var(--transition);
-      appearance: none;
-    }
-    .form-input:focus, .form-select:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
-    }
-    .form-input.error { border-color: #e05252; }
-    .form-error {
-      font-size: 0.78rem;
-      color: #e05252;
-      margin-top: 4px;
-      display: none;
-    }
-    .form-error.show { display: block; }
-    .form-select-wrap { position: relative; }
-    .form-select-wrap::after {
-      content: '▾';
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--gray-500);
-      pointer-events: none;
-    }
-    .form-submit {
-      width: 100%;
-      padding: 15px;
-      background: var(--navy);
-      color: var(--white);
-      border: none;
-      border-radius: var(--radius);
-      font-family: var(--font-body);
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-      letter-spacing: 0.04em;
-      margin-top: 8px;
-    }
-    .form-submit:hover { background: var(--gold); color: var(--navy); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-    .form-success {
-      display: none;
-      text-align: center;
-      padding: 24px;
-    }
-    .form-success.show { display: block; }
-    .form-success-icon { font-size: 3rem; margin-bottom: 12px; }
-    .form-success h3 {
-      font-family: var(--font-heading);
-      font-size: 1.3rem;
-      color: var(--navy);
-      margin-bottom: 8px;
-    }
-    .form-success p { font-size: 0.9rem; color: var(--gray-500); }
-
-    /* ── FOOTER ──────────────────────────────────────────────── */
-    #footer {
-      background: var(--navy-dark);
-      padding: 64px 0 32px;
-      color: rgba(255,255,255,0.65);
-    }
-    .footer-top {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
-      gap: 48px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      margin-bottom: 32px;
-    }
-    .footer-brand .nav-logo { margin-bottom: 16px; }
-    .footer-brand p { font-size: 0.875rem; line-height: 1.75; max-width: 280px; }
-    .footer-col h4 {
-      font-family: var(--font-heading);
-      font-size: 0.9rem;
-      color: var(--white);
-      font-weight: 600;
-      margin-bottom: 20px;
-      letter-spacing: 0.04em;
-    }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-links a {
-      color: rgba(255,255,255,0.55);
-      text-decoration: none;
-      font-size: 0.875rem;
-      transition: color var(--transition);
-    }
-    .footer-links a:hover { color: var(--gold); }
-    .footer-socials {
-      display: flex;
-      gap: 12px;
-      margin-top: 24px;
-    }
-    .social-btn {
-      width: 40px; height: 40px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.6);
-      text-decoration: none;
-      font-size: 1rem;
-      transition: var(--transition);
-    }
-    .social-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
-    .footer-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.3);
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    /* ── RESPONSIVE ──────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      .nav-links, .nav-cta { display: none; }
-      .hamburger { display: flex; }
-
-      .hero-stats { gap: 24px; }
-
-      .why-grid { grid-template-columns: 1fr; }
-      .curriculum-layout { grid-template-columns: 1fr; gap: 40px; }
-      .curriculum-list { grid-template-columns: 1fr; }
-      .instructors-grid { grid-template-columns: 1fr; }
-      .schedule-grid { grid-template-columns: 1fr; }
-      .platform-info { flex-direction: column; text-align: center; }
-      .fee-layout { grid-template-columns: 1fr; gap: 40px; }
-      .register-layout { grid-template-columns: 1fr; gap: 40px; }
-      .footer-top { grid-template-columns: 1fr; gap: 36px; }
-      .footer-bottom { justify-content: center; text-align: center; }
-    }
-
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .why-grid { grid-template-columns: repeat(2, 1fr); }
-      .instructors-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-top { grid-template-columns: 1fr 1fr; }
+    @media(min-width:769px) and (max-width:1024px){
+      .why-grid{grid-template-columns:repeat(2,1fr)}
+      .inst-grid{grid-template-columns:repeat(3,1fr)}
+      .fee-layout{grid-template-columns:1fr 1fr}
+      .footer-grid{grid-template-columns:1fr 1fr}
     }
   </style>
 </head>
 <body>
 
-<!-- ── NAVBAR ───────────────────────────────────────────────── -->
-<nav id="navbar">
+<!-- NAVBAR -->
+<nav id="nav">
   <div class="container">
-    <div class="nav-inner">
-      <a href="#hero" class="nav-logo">
-        <span class="nav-logo-icon">L</span>
-        Lex Master Academy
+    <div class="nw">
+      <a href="#hero" class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+            <rect width="40" height="40" rx="8" fill="#F8C826"/>
+            <text x="20" y="27" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-weight="900" font-size="18" fill="#2f3d82">L</text>
+          </svg>
+        </div>
+        <div>
+          <div class="logo-text">Lex Master Academy</div>
+          <div class="logo-sub">lexacademy.id</div>
+        </div>
       </a>
-      <ul class="nav-links">
+      <ul class="nlinks">
         <li><a href="#why">Keunggulan</a></li>
         <li><a href="#curriculum">Kurikulum</a></li>
         <li><a href="#instructors">Pengajar</a></li>
         <li><a href="#schedule">Jadwal</a></li>
-        <li><a href="#fee">Investasi</a></li>
+        <li><a href="#fee">Biaya</a></li>
       </ul>
-      <a href="#register" class="btn btn-gold nav-cta">Daftar Sekarang</a>
-      <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
-        <span></span><span></span><span></span>
-      </div>
+      <a href="#register" class="btn btn-yellow btn-sm">Daftar Sekarang</a>
+      <div class="hbg" id="hbg"><span></span><span></span><span></span></div>
     </div>
   </div>
 </nav>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" id="mobileClose" aria-label="Tutup menu">✕</button>
-  <a href="#why" class="mobile-link">Keunggulan</a>
-  <a href="#curriculum" class="mobile-link">Kurikulum</a>
-  <a href="#instructors" class="mobile-link">Pengajar</a>
-  <a href="#schedule" class="mobile-link">Jadwal</a>
-  <a href="#fee" class="mobile-link">Investasi</a>
-  <a href="#register" class="btn btn-gold">Daftar Sekarang</a>
+<div class="mob" id="mob">
+  <button class="mob-x" id="mobx">✕</button>
+  <a href="#why">Keunggulan</a><a href="#curriculum">Kurikulum</a>
+  <a href="#instructors">Pengajar</a><a href="#schedule">Jadwal</a>
+  <a href="#fee">Biaya</a>
+  <a href="#register" class="btn btn-yellow" style="margin-top:16px;width:100%;max-width:280px">Daftar Sekarang</a>
 </div>
 
-<!-- ── HERO ─────────────────────────────────────────────────── -->
+<!-- HERO -->
 <section id="hero">
-  <div class="hero-bg-pattern"></div>
-  <div class="hero-decor"></div>
+  <div class="hero-bg"></div><div class="hero-circle"></div>
   <div class="container">
-    <div class="hero-content">
-      <div class="hero-badge fade-in">Program Resmi Peradi · PKPA Angkatan 2025</div>
-      <h1 class="hero-title fade-in fade-in-delay-1">
-        Wujudkan Karier<br/>sebagai <em>Advokat</em><br/>Tersumpah Peradi
-      </h1>
-      <p class="hero-sub fade-in fade-in-delay-2">
-        Lex Master Academy menyelenggarakan Pendidikan Khusus Profesi Advokat (PKPA) secara penuh daring—dirancang untuk para sarjana hukum yang ingin mendapatkan izin praktik advokat resmi dari Peradi dengan kurikulum berbasis studi kasus nyata.
-      </p>
-      <div class="hero-actions fade-in fade-in-delay-3">
-        <a href="#register" class="btn btn-gold">Daftar Sekarang</a>
-        <a href="#curriculum" class="btn btn-outline-gold">Lihat Kurikulum</a>
+    <div class="hgrid">
+      <div>
+        <div class="heye fi">✦ PKPA Peradi · Angkatan 2026</div>
+        <h1 class="htitle fi d1">Raih Gelar <span>Advokat</span><br/>Tersumpah Peradi<br/>100% Online</h1>
+        <p class="hsub fi d2">Lex Master Academy menyelenggarakan Pendidikan Khusus Profesi Advokat (PKPA) secara penuh daring. Belajar dari 22 praktisi hukum terbaik, kapan saja, dari mana saja.</p>
+        <div class="hbtns fi d3">
+          <a href="#register" class="btn btn-yellow">Daftar Sekarang</a>
+          <a href="#curriculum" class="btn btn-outline-white">Lihat Kurikulum</a>
+        </div>
+        <div class="hproof fi d4">
+          <div><div class="hstat-n">22+</div><div class="hstat-l">Pengajar Aktif</div></div>
+          <div><div class="hstat-n">25</div><div class="hstat-l">Mata Ajar</div></div>
+          <div><div class="hstat-n">100%</div><div class="hstat-l">Diakui Peradi</div></div>
+          <div><div class="hstat-n">Online</div><div class="hstat-l">via Zoom</div></div>
+        </div>
       </div>
-      <div class="hero-stats fade-in fade-in-delay-4">
-        <div>
-          <div class="hero-stat-num">500+</div>
-          <div class="hero-stat-label">Alumni Bersertifikat</div>
-        </div>
-        <div>
-          <div class="hero-stat-num">98%</div>
-          <div class="hero-stat-label">Tingkat Kelulusan</div>
-        </div>
-        <div>
-          <div class="hero-stat-num">20+</div>
-          <div class="hero-stat-label">Pengajar Praktisi</div>
-        </div>
-        <div>
-          <div class="hero-stat-num">100%</div>
-          <div class="hero-stat-label">Diakui Peradi</div>
+      <div class="fi d2">
+        <div class="hcard">
+          <div class="hcard-title">Batch Aktif 2026</div>
+          <div class="hcard-batch">
+            <div class="hcb-name">📅 25 Mei — 23 April 2026</div>
+            <div class="hcb-meta">
+              <span>🕐 Sabtu &amp; Minggu, Online via Zoom</span>
+              <span>🌐 Full Online — akses dari manapun</span>
+              <span>📜 Sertifikat resmi Peradi</span>
+            </div>
+            <div class="hcb-price">
+              <div class="hcb-price-label">Biaya Program</div>
+              <div class="hcb-price-val">Rp 5.999.000</div>
+              <div class="hcb-price-sub">Alumni UIN: Rp 4.999.000</div>
+            </div>
+          </div>
+          <a href="#register" class="btn btn-yellow">Amankan Tempat Saya →</a>
+          <p class="hcard-note">Pendaftaran: Rp 500.000 · 20 pendaftar pertama diskon 50%</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── WHY CHOOSE US ─────────────────────────────────────────── -->
+<!-- WHY CHOOSE US -->
 <section id="why">
   <div class="container">
-    <div class="why-header">
-      <span class="section-tag">Keunggulan Kami</span>
-      <h2 class="section-title">Mengapa Memilih<br/>Lex Master Academy?</h2>
-      <div class="gold-rule"></div>
-      <p class="section-subtitle" style="margin: 0 auto;">Kami memahami kebutuhan para sarjana hukum yang ingin menjadi advokat profesional dengan cara yang efektif dan efisien.</p>
+    <div class="sec-head">
+      <div class="tag">Keunggulan Kami</div>
+      <h2 class="h2">Kenapa Memilih Lex Master Academy?</h2>
+      <p class="sub">Dirancang khusus untuk sarjana hukum yang ingin menjadi advokat profesional dengan cara yang efektif dan efisien.</p>
     </div>
-    <div class="why-grid" style="margin-top: 56px;">
-      <div class="why-card fade-in">
-        <div class="why-icon">🌐</div>
-        <h3>Full Online</h3>
-        <p>Seluruh proses pembelajaran diselenggarakan secara daring—mulai dari perkuliahan, ujian, hingga pengumpulan berkas—tanpa perlu hadir secara fisik.</p>
-      </div>
-      <div class="why-card fade-in fade-in-delay-1">
-        <div class="why-icon">📍</div>
-        <h3>Bisa Diakses dari Manapun</h3>
-        <p>Ikuti PKPA dari Jakarta, Surabaya, Medan, Makassar, atau kota manapun di Indonesia—bahkan dari luar negeri—selama ada koneksi internet.</p>
-      </div>
-      <div class="why-card fade-in fade-in-delay-2">
-        <div class="why-icon">⚖️</div>
-        <h3>Pembicara Fully Practical Case Based</h3>
-        <p>Setiap sesi diasuh langsung oleh advokat senior, hakim aktif, dan pejabat Peradi dengan pendekatan studi kasus nyata dari pengalaman praktik mereka.</p>
-      </div>
-      <div class="why-card fade-in fade-in-delay-1">
-        <div class="why-icon">📚</div>
-        <h3>Materi Simple yet Impactful</h3>
-        <p>Kurikulum dirancang ringkas namun komprehensif—fokus pada hal-hal esensial yang benar-benar dibutuhkan dalam praktik hukum sehari-hari.</p>
-      </div>
-      <div class="why-card fade-in fade-in-delay-2">
-        <div class="why-icon">🤝</div>
-        <h3>Jejaring Lawyer Terkemuka</h3>
-        <p>Bergabunglah dengan komunitas alumni dan pengajar dari firma hukum terkemuka di Indonesia. Bangun relasi profesional yang membuka peluang karier lebih luas.</p>
-      </div>
-      <div class="why-card fade-in fade-in-delay-3">
-        <div class="why-icon">🎁</div>
-        <h3>Personal Gift Eksklusif</h3>
-        <p>Setiap peserta akan menerima paket welcome gift eksklusif berisi materi cetak premium, tote bag resmi, dan akses referensi hukum digital pilihan.</p>
-      </div>
+    <div class="why-grid">
+      <div class="wcard fi"><div class="wicon">🌐</div><h3>Full Online</h3><p>Seluruh perkuliahan, ujian, dan administrasi dilakukan sepenuhnya secara daring—tanpa perlu hadir fisik sama sekali.</p></div>
+      <div class="wcard fi d1"><div class="wicon">📍</div><h3>Akses dari Manapun</h3><p>Ikuti PKPA dari kota manapun di Indonesia atau bahkan luar negeri. Koneksi internet adalah satu-satunya syarat teknis.</p></div>
+      <div class="wcard fi d2"><div class="wicon">⚖️</div><h3>Pembicara Practical Case-Based</h3><p>22 narasumber aktif—advokat senior, hakim, dan akademisi—mengajar langsung berbasis kasus hukum nyata.</p></div>
+      <div class="wcard fi d1"><div class="wicon">📖</div><h3>Materi Simple yet Impactful</h3><p>25 mata ajar yang disusun ringkas namun komprehensif—fokus pada hal yang langsung bisa dipraktikkan.</p></div>
+      <div class="wcard fi d2"><div class="wicon">🤝</div><h3>Jejaring Lawyer Terkemuka</h3><p>Bergabung dengan komunitas alumni dan pengajar dari lembaga hukum terkemuka di Indonesia.</p></div>
+      <div class="wcard fi d3"><div class="wicon">🎁</div><h3>Personal Gift Eksklusif</h3><p>Setiap peserta menerima welcome kit premium berisi bahan ajar cetak, tote bag resmi, dan akses referensi hukum digital.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ── CURRICULUM ────────────────────────────────────────────── -->
+<!-- CURRICULUM -->
 <section id="curriculum">
   <div class="container">
-    <div class="curriculum-layout">
-      <div class="curriculum-intro fade-in">
-        <span class="section-tag">Kurikulum</span>
-        <h2 class="section-title light">Silabus PKPA Sesuai Standar Peradi</h2>
-        <div class="gold-rule"></div>
-        <p class="section-subtitle light">
-          Kurikulum kami disusun sepenuhnya sesuai dengan Surat Keputusan Dewan Pimpinan Nasional Peradi dan mencakup seluruh mata ajar yang diwajibkan untuk memperoleh sertifikat advokat.
-        </p>
-        <div class="curriculum-peradi-badge">
-          ✓ &nbsp; Tersertifikasi & Diakui Peradi Resmi
-        </div>
-        <div class="curriculum-peradi-badge" style="margin-left: 12px; margin-top: 12px;">
-          ✓ &nbsp; 320 Jam Pembelajaran
-        </div>
+    <div class="curr-layout">
+      <div class="fi">
+        <div class="tag light">Kurikulum</div>
+        <h2 class="h2 light">25 Mata Ajar Sesuai Standar Peradi</h2>
+        <p class="sub light" style="margin-bottom:20px">Kurikulum disusun mengacu pada ketentuan DPN Peradi, mencakup seluruh aspek profesi advokat dari hukum acara hingga praktik litigasi.</p>
+        <div class="curr-badge">✓ &nbsp;Diakui &amp; Tersertifikasi Peradi</div><br/>
+        <div class="curr-badge" style="margin-top:10px">📋 &nbsp;3 Materi Tambahan Eksklusif</div>
       </div>
-      <div class="curriculum-list">
-        <div class="curr-item fade-in">
-          <span class="curr-num">01</span>
-          <span class="curr-text">Profesi & Etika Advokat</span>
-        </div>
-        <div class="curr-item fade-in fade-in-delay-1">
-          <span class="curr-num">02</span>
-          <span class="curr-text">Hukum Acara Perdata</span>
-        </div>
-        <div class="curr-item fade-in fade-in-delay-1">
-          <span class="curr-num">03</span>
-          <span class="curr-text">Hukum Acara Pidana</span>
-        </div>
-        <div class="curr-item fade-in fade-in-delay-2">
-          <span class="curr-num">04</span>
-          <span class="curr-text">Hukum Acara Peradilan Agama</span>
-        </div>
-        <div class="curr-item fade-in fade-in-delay-2">
-          <span class="curr-num">05</span>
-          <span class="curr-text">Hukum Acara PTUN</span>
-        </div>
-        <div class="curr-item fade-in fade-in-delay-3">
-          <span class="curr-num">06</span>
-          <span class="curr-text">Hukum Acara Mahkamah Konstitusi</span>
-        </div>
-        <div class="curr-item fade-in fade-in-delay-3">
-          <span class="curr-num">07</span>
-          <span class="curr-text">Hukum Perdata Materil</span>
-        </div>
-        <div class="curr-item fade-in">
-          <span class="curr-num">08</span>
-          <span class="curr-text">Hukum Pidana Materil</span>
-        </div>
-        <div class="curr-item fade-in fade-in-delay-1">
-          <span class="curr-num">09</span>
-          <span class="curr-text">Legal Drafting & Contract Drafting</span>
-        </div>
-        <div class="curr-item fade-in fade-in-delay-1">
-          <span class="curr-num">10</span>
-          <span class="curr-text">Hukum Korporat & Bisnis</span>
-        </div>
-        <div class="curr-item fade-in fade-in-delay-2">
-          <span class="curr-num">11</span>
-          <span class="curr-text">Hukum Kepailitan & PKPU</span>
-        </div>
-        <div class="curr-item fade-in fade-in-delay-2">
-          <span class="curr-num">12</span>
-          <span class="curr-text">Hukum Hak Kekayaan Intelektual</span>
-        </div>
-        <div class="curr-item fade-in fade-in-delay-3">
-          <span class="curr-num">13</span>
-          <span class="curr-text">Hukum Pasar Modal & Investasi</span>
-        </div>
-        <div class="curr-item fade-in fade-in-delay-3">
-          <span class="curr-num">14</span>
-          <span class="curr-text">Arbitrase & Alternatif Penyelesaian Sengketa</span>
-        </div>
-        <div class="curr-item fade-in">
-          <span class="curr-num">15</span>
-          <span class="curr-text">Hukum Persaingan Usaha</span>
-        </div>
-        <div class="curr-item fade-in fade-in-delay-1">
-          <span class="curr-num">16</span>
-          <span class="curr-text">Teknik Persidangan & Negosiasi</span>
-        </div>
+      <div class="curr-grid">
+        <div class="citem fi"><span class="cn">01</span><span class="ct">Fungsi &amp; Peran Organisasi Advokat</span></div>
+        <div class="citem fi d1"><span class="cn">02</span><span class="ct">Kode Etik Profesi Advokat</span></div>
+        <div class="citem fi d1"><span class="cn">03</span><span class="ct">Hukum Acara Peradilan Agama</span></div>
+        <div class="citem fi d2"><span class="cn">04</span><span class="ct">Sistem Peradilan Indonesia</span></div>
+        <div class="citem fi d2"><span class="cn">05</span><span class="ct">Hukum Acara Perdata</span></div>
+        <div class="citem fi d3"><span class="cn">06</span><span class="ct">Hukum Acara Perdata (Studi Kasus)</span></div>
+        <div class="citem fi d3"><span class="cn">07</span><span class="ct">Penelusuran &amp; Dokumentasi Hukum</span></div>
+        <div class="citem fi"><span class="cn">08</span><span class="ct">Praktik Acara Peradilan TUN</span></div>
+        <div class="citem fi d1"><span class="cn">09</span><span class="ct">Upaya Hukum &amp; Penemuan Hukum</span></div>
+        <div class="citem fi d1"><span class="cn">10</span><span class="ct">Hukum Acara Mahkamah Konstitusi</span></div>
+        <div class="citem fi d2"><span class="cn">11</span><span class="ct">Argumentasi Hukum (Legal Reasoning)</span></div>
+        <div class="citem fi d2"><span class="cn">12</span><span class="ct">Hukum Acara Pengadilan HAM</span></div>
+        <div class="citem fi d3"><span class="cn">13</span><span class="ct">Legal Opinion &amp; Legal Due Diligence</span></div>
+        <div class="citem fi d3"><span class="cn">14</span><span class="ct">Hukum Acara Peradilan Hub. Industrial</span></div>
+        <div class="citem fi"><span class="cn">15</span><span class="ct">Organisasi Perusahaan, Merger &amp; Akuisisi</span></div>
+        <div class="citem fi d1"><span class="cn">16</span><span class="ct">Hukum Acara Pengadilan Niaga (Kepailitan)</span></div>
+        <div class="citem extra fi d1"><span class="cn">17</span><span class="ct">Hukum Acara Niaga (HaKI &amp; PDP)<span class="cextra-tag">+Baru</span></span></div>
+        <div class="citem extra fi d2"><span class="cn">18</span><span class="ct">Trilogi Hukum Pidana (KUHP Lama &amp; Baru)<span class="cextra-tag">+Baru</span></span></div>
+        <div class="citem fi d2"><span class="cn">19</span><span class="ct">Hukum Acara Pidana</span></div>
+        <div class="citem fi d3"><span class="cn">20</span><span class="ct">Teknik Wawancara dengan Klien</span></div>
+        <div class="citem fi d3"><span class="cn">21</span><span class="ct">Hukum Acara Arbitrase &amp; ADR</span></div>
+        <div class="citem fi"><span class="cn">22</span><span class="ct">Perancangan &amp; Analisa Kontrak</span></div>
+        <div class="citem extra fi d1"><span class="cn">23</span><span class="ct">Hukum Acara Pengadilan Pajak<span class="cextra-tag">+Baru</span></span></div>
+        <div class="citem fi d1"><span class="cn">24</span><span class="ct">Hukum Acara Tindak Pidana Korupsi</span></div>
+        <div class="citem fi d2"><span class="cn">25</span><span class="ct">Hukum Acara Persaingan Usaha</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── INSTRUCTORS ───────────────────────────────────────────── -->
+<!-- INSTRUCTORS -->
 <section id="instructors">
   <div class="container">
-    <div class="instructors-header">
-      <span class="section-tag">Pengajar & Narasumber</span>
-      <h2 class="section-title">Para Profesional Hukum<br/>Berpengalaman</h2>
-      <div class="gold-rule"></div>
-      <p class="section-subtitle" style="margin: 0 auto;">Diasuh oleh advokat senior, hakim aktif, akademisi terkemuka, dan pejabat resmi Peradi.</p>
+    <div class="inst-head">
+      <div class="tag">Pengajar &amp; Narasumber</div>
+      <h2 class="h2">22 Praktisi Hukum Terbaik</h2>
+      <p class="sub">Diasuh langsung oleh advokat aktif, akademisi, dan tokoh hukum terkemuka di Indonesia.</p>
     </div>
-    <div class="instructors-grid">
-      <div class="instructor-card fade-in">
-        <div class="instructor-avatar">AR</div>
-        <div class="instructor-body">
-          <div class="instructor-name">Dr. H. Arief Rachman, S.H., M.H.</div>
-          <div class="instructor-credential">Ketua DPC Peradi Jakarta Selatan</div>
-          <p class="instructor-desc">25 tahun pengalaman sebagai advokat litigasi. Ahli hukum acara perdata dan arbitrase internasional. Penasihat hukum korporat Fortune 500.</p>
-          <span class="instructor-tag">Pejabat Peradi</span>
-        </div>
-      </div>
-      <div class="instructor-card fade-in fade-in-delay-1">
-        <div class="instructor-avatar">SR</div>
-        <div class="instructor-body">
-          <div class="instructor-name">Prof. Dr. Siti Rahmawati, S.H., M.Hum.</div>
-          <div class="instructor-credential">Guru Besar Fakultas Hukum UI</div>
-          <p class="instructor-desc">Pakar hukum pidana dan kriminologi. Anggota Komisi Hukum Nasional RI. Penulis lebih dari 40 jurnal hukum internasional terindeks Scopus.</p>
-          <span class="instructor-tag">Akademisi</span>
-        </div>
-      </div>
-      <div class="instructor-card fade-in fade-in-delay-2">
-        <div class="instructor-avatar">HW</div>
-        <div class="instructor-body">
-          <div class="instructor-name">Dr. Hendra Wijaya, S.H., M.H.</div>
-          <div class="instructor-credential">Hakim Pengadilan Negeri Jakarta Pusat</div>
-          <p class="instructor-desc">Hakim aktif dengan 18 tahun karier yudisial. Spesialis perkara perdata niaga dan kepailitan. Sertifikasi mediator bersertifikat BANI.</p>
-          <span class="instructor-tag">Hakim</span>
-        </div>
-      </div>
-      <div class="instructor-card fade-in">
-        <div class="instructor-avatar">MP</div>
-        <div class="instructor-body">
-          <div class="instructor-name">Maya Priyanti, S.H., M.Kn., LL.M.</div>
-          <div class="instructor-credential">Senior Partner, MP & Associates Law Firm</div>
-          <p class="instructor-desc">Ahli hukum korporat dan M&A dengan rekam jejak lebih dari 200 transaksi senilai triliunan rupiah. Praktisi contract drafting dan legal due diligence.</p>
-          <span class="instructor-tag">Advokat Senior</span>
-        </div>
-      </div>
-      <div class="instructor-card fade-in fade-in-delay-1">
-        <div class="instructor-avatar">AF</div>
-        <div class="instructor-body">
-          <div class="instructor-name">Ahmad Fauzi, S.H., M.H., CIArb.</div>
-          <div class="instructor-credential">Arbiter Terdaftar BANI & ICC Paris</div>
-          <p class="instructor-desc">Certified International Arbitrator dengan pengalaman menangani sengketa investasi internasional. Narasumber tetap forum hukum ASEAN.</p>
-          <span class="instructor-tag">Advokat & Arbiter</span>
-        </div>
-      </div>
-      <div class="instructor-card fade-in fade-in-delay-2">
-        <div class="instructor-avatar">RL</div>
-        <div class="instructor-body">
-          <div class="instructor-name">Dr. Ratna Lestari, S.H., M.H.</div>
-          <div class="instructor-credential">Sekretaris DPN Peradi</div>
-          <p class="instructor-desc">Pejabat aktif Peradi yang terlibat langsung dalam penyusunan regulasi profesi advokat. Narasumber ahli dalam etika profesi dan kode perilaku advokat.</p>
-          <span class="instructor-tag">Pejabat Peradi</span>
-        </div>
-      </div>
+    <div class="inst-grid">
+      <div class="icard fi"><div class="icard-top"><div class="iav">GR</div><div><div class="iname">Gugum Ridho Putra, S.H., M.H.</div><div class="icred">Advokat &amp; Praktisi Hukum</div></div></div><div class="ibody"><span class="itag">Advokat</span></div></div>
+      <div class="icard fi d1"><div class="icard-top"><div class="iav">DR</div><div><div class="iname">Dharma Rozali Azhar, M.H.</div><div class="icred">Praktisi Hukum</div></div></div><div class="ibody"><span class="itag">Praktisi</span></div></div>
+      <div class="icard fi d2"><div class="icard-top"><div class="iav">JI</div><div><div class="iname">Julius Ibrani, S.H.</div><div class="icred">Ketua PBHI</div></div></div><div class="ibody"><span class="itag">Pejabat PBHI</span></div></div>
+      <div class="icard fi d3"><div class="icard-top"><div class="iav">FT</div><div><div class="iname">Dr. Fitriana, S.H., M.H.</div><div class="icred">Doktor Hukum</div></div></div><div class="ibody"><span class="itag">Akademisi</span></div></div>
+      <div class="icard fi"><div class="icard-top"><div class="iav">HV</div><div><div class="iname">Harvardy</div><div class="icred">Praktisi Hukum</div></div></div><div class="ibody"><span class="itag">Praktisi</span></div></div>
+      <div class="icard fi d1"><div class="icard-top"><div class="iav">AS</div><div><div class="iname">Arthur Sanger, S.H., AIIArb</div><div class="icred">Arbiter Internasional</div></div></div><div class="ibody"><span class="itag">Arbiter</span></div></div>
+      <div class="icard fi d2"><div class="icard-top"><div class="iav">SA</div><div><div class="iname">Savitri Andriani, S.H., M.Kn</div><div class="icred">Notaris &amp; Praktisi</div></div></div><div class="ibody"><span class="itag">Notaris</span></div></div>
+      <div class="icard fi d3"><div class="icard-top"><div class="iav">AZ</div><div><div class="iname">Dr. Azmi Syahputra, S.H., M.H.</div><div class="icred">Doktor Hukum</div></div></div><div class="ibody"><span class="itag">Akademisi</span></div></div>
+      <div class="icard fi"><div class="icard-top"><div class="iav">IM</div><div><div class="iname">Irfan Maulana Muharam, S.H.</div><div class="icred">Advokat</div></div></div><div class="ibody"><span class="itag">Advokat</span></div></div>
+      <div class="icard fi d1"><div class="icard-top"><div class="iav">NR</div><div><div class="iname">Nur Ridhowati, S.H.</div><div class="icred">Advokat</div></div></div><div class="ibody"><span class="itag">Advokat</span></div></div>
+      <div class="icard fi d2"><div class="icard-top"><div class="iav">NA</div><div><div class="iname">Nico Angelo Modulo</div><div class="icred">Praktisi Hukum</div></div></div><div class="ibody"><span class="itag">Praktisi</span></div></div>
+      <div class="icard fi d3"><div class="icard-top"><div class="iav">YL</div><div><div class="iname">Yoshua Lamboy</div><div class="icred">Praktisi Hukum</div></div></div><div class="ibody"><span class="itag">Praktisi</span></div></div>
+      <div class="icard fi"><div class="icard-top"><div class="iav">TG</div><div><div class="iname">Taufik G Nugroho, S.E., M.M., CPTT</div><div class="icred">Konsultan &amp; Trainer</div></div></div><div class="ibody"><span class="itag">Konsultan</span></div></div>
+      <div class="icard fi d1"><div class="icard-top"><div class="iav">MD</div><div><div class="iname">M. Dzul Ikram, S.H., M.H.</div><div class="icred">Advokat</div></div></div><div class="ibody"><span class="itag">Advokat</span></div></div>
+      <div class="icard fi d2"><div class="icard-top"><div class="iav">RH</div><div><div class="iname">Rian Hidayat, S.H., M.H.</div><div class="icred">Advokat</div></div></div><div class="ibody"><span class="itag">Advokat</span></div></div>
+      <div class="icard fi d3"><div class="icard-top"><div class="iav">MN</div><div><div class="iname">M. Nuzul Wibawa, M.H.</div><div class="icred">Praktisi Hukum</div></div></div><div class="ibody"><span class="itag">Praktisi</span></div></div>
+      <div class="icard fi"><div class="icard-top"><div class="iav">IR</div><div><div class="iname">Dr. Indra Rahmatullah, S.H.I., M.H.</div><div class="icred">Doktor Hukum Islam</div></div></div><div class="ibody"><span class="itag">Akademisi</span></div></div>
+      <div class="icard fi d1"><div class="icard-top"><div class="iav">MS</div><div><div class="iname">Dr. Mustolih, S.H.I., M.H., CLA.</div><div class="icred">Certified Legal Auditor</div></div></div><div class="ibody"><span class="itag">Akademisi</span></div></div>
+      <div class="icard fi d2"><div class="icard-top"><div class="iav">MA</div><div><div class="iname">Dr. M. Ali Hanafiah Selian, S.H., M.H.</div><div class="icred">Doktor Hukum</div></div></div><div class="ibody"><span class="itag">Akademisi</span></div></div>
+      <div class="icard fi d3"><div class="icard-top"><div class="iav">AF</div><div><div class="iname">Dr. Afwan Faizin, M.A.</div><div class="icred">Akademisi</div></div></div><div class="ibody"><span class="itag">Akademisi</span></div></div>
+      <div class="icard fi"><div class="icard-top"><div class="iav">FK</div><div><div class="iname">Dr. Fathudin Kalimas, S.H., M.H.</div><div class="icred">Doktor Hukum</div></div></div><div class="ibody"><span class="itag">Akademisi</span></div></div>
+      <div class="icard fi d1"><div class="icard-top"><div class="iav">MI</div><div><div class="iname">Moh. Ikhwan Mufti, S.H.I., M.H.</div><div class="icred">Praktisi Hukum Islam</div></div></div><div class="ibody"><span class="itag">Praktisi</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- ── SCHEDULE ──────────────────────────────────────────────── -->
+<!-- SCHEDULE -->
 <section id="schedule">
   <div class="container">
-    <div class="schedule-header">
-      <span class="section-tag">Jadwal & Metode Belajar</span>
-      <h2 class="section-title">Pilih Batch yang<br/>Sesuai Jadwal Anda</h2>
-      <div class="gold-rule"></div>
+    <div class="shead">
+      <div class="tag">Jadwal &amp; Metode</div>
+      <h2 class="h2">Jadwal Batch 2026</h2>
+      <p class="sub">Program PKPA online yang bisa diikuti dari seluruh Indonesia.</p>
     </div>
-    <div class="schedule-grid">
-      <div class="batch-card fade-in">
-        <div class="batch-number">Batch 06 · 2025</div>
-        <div class="batch-title">Mei — Juli 2025</div>
-        <ul class="batch-details">
-          <li class="batch-detail">
-            <span class="batch-detail-icon">📅</span>
-            <span><strong>Mulai:</strong> 12 Mei 2025</span>
-          </li>
-          <li class="batch-detail">
-            <span class="batch-detail-icon">🏁</span>
-            <span><strong>Selesai:</strong> 20 Juli 2025</span>
-          </li>
-          <li class="batch-detail">
-            <span class="batch-detail-icon">🕐</span>
-            <span><strong>Jadwal:</strong> Sabtu & Minggu, 08.00 – 16.00 WIB</span>
-          </li>
-          <li class="batch-detail">
-            <span class="batch-detail-icon">👥</span>
-            <span><strong>Kuota:</strong> Maks. 80 peserta</span>
-          </li>
-          <li class="batch-detail">
-            <span class="batch-detail-icon">⚡</span>
-            <span><strong>Pendaftaran Ditutup:</strong> 5 Mei 2025</span>
-          </li>
-        </ul>
-        <a href="#register" class="btn btn-navy batch-cta">Daftar Batch 06</a>
+    <div class="batch-card fi">
+      <div class="batch-label">Batch Aktif · 2026</div>
+      <div class="batch-title">25 Mei — 23 April 2026</div>
+      <div class="batch-period">Program PKPA Resmi Peradi · Angkatan 2026</div>
+      <div class="batch-rows">
+        <div class="brow"><span class="brow-icon">🕐</span><span>Sabtu &amp; Minggu, sesi live via Zoom</span></div>
+        <div class="brow"><span class="brow-icon">💻</span><span>Full Online — akses dari seluruh Indonesia</span></div>
+        <div class="brow"><span class="brow-icon">📋</span><span>25 mata ajar sesuai standar Peradi</span></div>
+        <div class="brow"><span class="brow-icon">🎓</span><span>Sertifikat PKPA resmi berlogo Peradi setelah lulus</span></div>
+        <div class="brow"><span class="brow-icon">📩</span><span>Info lebih lanjut: <strong>Lexacademy.ind@gmail.com</strong></span></div>
       </div>
-      <div class="batch-card featured fade-in fade-in-delay-1">
-        <div class="batch-badge">Segera Dibuka</div>
-        <div class="batch-number">Batch 07 · 2025</div>
-        <div class="batch-title">Agustus — Oktober 2025</div>
-        <ul class="batch-details">
-          <li class="batch-detail">
-            <span class="batch-detail-icon">📅</span>
-            <span><strong>Mulai:</strong> 11 Agustus 2025</span>
-          </li>
-          <li class="batch-detail">
-            <span class="batch-detail-icon">🏁</span>
-            <span><strong>Selesai:</strong> 19 Oktober 2025</span>
-          </li>
-          <li class="batch-detail">
-            <span class="batch-detail-icon">🕐</span>
-            <span><strong>Jadwal:</strong> Sabtu & Minggu, 08.00 – 16.00 WIB</span>
-          </li>
-          <li class="batch-detail">
-            <span class="batch-detail-icon">👥</span>
-            <span><strong>Kuota:</strong> Maks. 80 peserta</span>
-          </li>
-          <li class="batch-detail">
-            <span class="batch-detail-icon">⚡</span>
-            <span><strong>Early Bird Hingga:</strong> 31 Juli 2025</span>
-          </li>
-        </ul>
-        <a href="#register" class="btn btn-gold batch-cta">Daftar Batch 07</a>
-      </div>
+      <a href="#register" class="btn btn-blue">Daftar Batch Ini</a>
     </div>
-    <div class="platform-info fade-in">
-      <div class="platform-icon">💻</div>
-      <div class="platform-text">
-        <h4>Metode Pembelajaran: Full Online via Zoom</h4>
-        <p>Seluruh sesi perkuliahan diselenggarakan secara live melalui Zoom. Rekaman sesi tersedia selama 7 hari setelah kelas untuk review. Peserta mendapat akses ke Learning Management System (LMS) pribadi berisi materi, latihan soal, dan forum diskusi.</p>
+    <div class="platform-box fi">
+      <div class="pb-icon">💻</div>
+      <div class="pb-text">
+        <h4>Metode: Full Online via Zoom</h4>
+        <p>Semua sesi live via Zoom. Rekaman tersedia pasca kelas. Peserta mendapat akses LMS berisi materi, latihan soal, dan forum diskusi.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── INVESTMENT FEE ─────────────────────────────────────────── -->
+<!-- FEE -->
 <section id="fee">
   <div class="container">
+    <div class="sec-head">
+      <div class="tag">Biaya Investasi</div>
+      <h2 class="h2">Investasi untuk Karier Hukum Anda</h2>
+      <p class="sub">Pilih paket sesuai kategori peserta. Dapatkan promo early bird untuk 20 pendaftar pertama.</p>
+    </div>
     <div class="fee-layout">
-      <div class="fee-intro fade-in">
-        <span class="section-tag">Investasi Anda</span>
-        <h2 class="section-title">Harga Terjangkau,<br/>Nilai Tak Ternilai</h2>
-        <div class="gold-rule"></div>
-        <p class="section-subtitle">
-          Investasi terbaik untuk perjalanan karier hukum Anda. Dapatkan sertifikat PKPA yang diakui Peradi dan buka pintu menuju profesi advokat tersumpah.
-        </p>
-        <div style="margin-top: 32px; display: flex; flex-direction: column; gap: 16px;">
-          <div style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--gray-700);">
-            <span style="color: var(--gold);">✓</span> Sertifikat PKPA resmi berlogo Peradi
-          </div>
-          <div style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--gray-700);">
-            <span style="color: var(--gold);">✓</span> Akses LMS seumur hidup
-          </div>
-          <div style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--gray-700);">
-            <span style="color: var(--gold);">✓</span> Rekaman seluruh sesi perkuliahan
-          </div>
-          <div style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--gray-700);">
-            <span style="color: var(--gold);">✓</span> Modul & bahan ajar digital lengkap
-          </div>
-          <div style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--gray-700);">
-            <span style="color: var(--gold);">✓</span> Personal gift eksklusif
-          </div>
-          <div style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--gray-700);">
-            <span style="color: var(--gold);">✓</span> Akses grup alumni & jejaring advokat
-          </div>
+      <div class="fcard fi">
+        <div class="fcard-top">
+          <div class="fcard-name">Biaya Pendaftaran</div>
+          <div class="fcard-price"><span class="fcard-curr">Rp</span><span class="fcard-amount">500.000</span></div>
+        </div>
+        <div class="fcard-body">
+          <ul class="fcard-list">
+            <li class="fcard-item"><span class="fcard-item-icon">✓</span>Biaya administrasi pendaftaran</li>
+            <li class="fcard-item"><span class="fcard-item-icon">✓</span>Dibayarkan saat submit formulir</li>
+            <li class="fcard-item"><span class="fcard-item-icon">🎉</span><strong>20 pendaftar pertama: diskon 50% (Rp 250.000)</strong></li>
+          </ul>
         </div>
       </div>
-      <div class="fee-card fade-in fade-in-delay-1">
-        <div class="fee-card-header">
-          <h3>Investasi Program PKPA</h3>
-          <div class="fee-amount">
-            <span class="strikethrough">Rp 12.500.000</span>
-            <sub>Rp</sub> 9.500.000
-          </div>
-          <div style="font-size: 0.78rem; color: var(--navy); margin-top: 6px; font-weight: 600; opacity: 0.7;">Early Bird — Hemat Rp 3.000.000</div>
+      <div class="fcard fi d1">
+        <div class="fcard-top">
+          <div class="fcard-name">Biaya Program — Umum</div>
+          <div class="fcard-price"><span class="fcard-curr">Rp</span><span class="fcard-amount">5.999.000</span></div>
         </div>
-        <div class="fee-card-body">
-          <div class="fee-payment-title">Cara Pembayaran</div>
-          <div class="fee-bank">
-            <div class="fee-bank-name">Bank BCA</div>
-            <div class="fee-bank-number">123 · 456 · 7890</div>
-            <div class="fee-bank-holder">a.n. Lex Master Academy</div>
-          </div>
-          <div class="fee-bank">
-            <div class="fee-bank-name">Bank Mandiri</div>
-            <div class="fee-bank-number">098 · 765 · 4321</div>
-            <div class="fee-bank-holder">a.n. Lex Master Academy</div>
-          </div>
-          <div class="fee-bank">
-            <div class="fee-bank-name">Bank BRI</div>
-            <div class="fee-bank-number">0012 · 0100 · 8888 · 509</div>
-            <div class="fee-bank-holder">a.n. Lex Master Academy</div>
-          </div>
-          <p class="fee-note">Setelah melakukan pembayaran, kirimkan bukti transfer via WhatsApp ke nomor yang tertera. Tim kami akan mengonfirmasi pendaftaran Anda dalam 1×24 jam hari kerja. Tersedia opsi cicilan 3× tanpa bunga untuk pembayaran via kartu kredit tertentu.</p>
+        <div class="fcard-body">
+          <ul class="fcard-list">
+            <li class="fcard-item"><span class="fcard-item-icon">✓</span>Akses 25 mata ajar live Zoom</li>
+            <li class="fcard-item"><span class="fcard-item-icon">✓</span>Modul &amp; bahan ajar digital</li>
+            <li class="fcard-item"><span class="fcard-item-icon">✓</span>Sertifikat PKPA resmi Peradi</li>
+            <li class="fcard-item"><span class="fcard-item-icon">✓</span>Personal gift eksklusif</li>
+            <li class="fcard-item"><span class="fcard-item-icon">✓</span>Akses komunitas alumni</li>
+          </ul>
+          <a href="#register" class="btn btn-blue fcard-cta">Daftar Umum</a>
         </div>
+      </div>
+      <div class="fcard featured fi d2">
+        <div class="fcard-top">
+          <div class="fcard-badge">Khusus Alumni UIN</div>
+          <div class="fcard-name">Biaya Program — Alumni UIN</div>
+          <div class="fcard-price"><span class="fcard-curr">Rp</span><span class="fcard-amount">4.999.000</span></div>
+        </div>
+        <div class="fcard-body">
+          <ul class="fcard-list">
+            <li class="fcard-item"><span class="fcard-item-icon">✓</span>Semua manfaat paket umum</li>
+            <li class="fcard-item"><span class="fcard-item-icon">✓</span>Harga spesial alumni UIN</li>
+            <li class="fcard-item"><span class="fcard-item-icon">✓</span>Akses 25 mata ajar live Zoom</li>
+            <li class="fcard-item"><span class="fcard-item-icon">✓</span>Sertifikat PKPA resmi Peradi</li>
+            <li class="fcard-item"><span class="fcard-item-icon">✓</span>Personal gift eksklusif</li>
+          </ul>
+          <a href="#register" class="btn btn-yellow fcard-cta">Daftar Alumni UIN</a>
+        </div>
+      </div>
+    </div>
+    <div class="fee-note-box fi">
+      <span class="fee-note-icon">💳</span>
+      <div class="fee-note-text">
+        Pembayaran dapat dilakukan via <strong>transfer bank</strong> atau metode lain yang akan dikonfirmasi oleh tim kami. Setelah mendaftar, tim Lex Master Academy akan menghubungi Anda melalui WhatsApp/email untuk instruksi pembayaran lengkap. Info: <strong>Lexacademy.ind@gmail.com</strong>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── REGISTRATION FORM ──────────────────────────────────────── -->
+<!-- REGISTRATION -->
 <section id="register">
   <div class="container">
-    <div class="register-layout">
-      <div class="register-intro fade-in">
-        <span class="section-tag">Pendaftaran</span>
-        <h2 class="section-title">Mulai Perjalanan<br/>Hukum Anda Hari Ini</h2>
-        <div class="gold-rule"></div>
-        <p class="section-subtitle">Isi formulir pendaftaran di bawah ini. Tim Lex Master Academy akan menghubungi Anda dalam 24 jam untuk konfirmasi dan panduan selanjutnya.</p>
-        <ul class="register-perks">
-          <li class="register-perk">
-            <span class="register-perk-icon">1</span>
-            <span>Isi formulir pendaftaran dengan lengkap dan benar</span>
-          </li>
-          <li class="register-perk">
-            <span class="register-perk-icon">2</span>
-            <span>Tim kami menghubungi Anda untuk konfirmasi dalam 24 jam</span>
-          </li>
-          <li class="register-perk">
-            <span class="register-perk-icon">3</span>
-            <span>Lakukan pembayaran sesuai instruksi yang diberikan</span>
-          </li>
-          <li class="register-perk">
-            <span class="register-perk-icon">4</span>
-            <span>Terima akses LMS dan welcome kit eksklusif Anda</span>
-          </li>
-        </ul>
+    <div class="reg-layout">
+      <div class="fi">
+        <div class="tag">Pendaftaran</div>
+        <h2 class="h2">Daftar Sekarang</h2>
+        <p class="sub">Isi formulir dan tim kami akan menghubungi Anda dalam 24 jam untuk konfirmasi dan panduan selanjutnya.</p>
+        <div class="reg-steps">
+          <div class="rstep"><div class="rstep-num">1</div><div class="rstep-body"><h4>Isi Formulir</h4><p>Lengkapi data diri dan pilih kategori peserta.</p></div></div>
+          <div class="rstep"><div class="rstep-num">2</div><div class="rstep-body"><h4>Konfirmasi Tim Kami</h4><p>Kami menghubungi Anda dalam 1×24 jam via WhatsApp/email.</p></div></div>
+          <div class="rstep"><div class="rstep-num">3</div><div class="rstep-body"><h4>Bayar Biaya Pendaftaran</h4><p>Rp 500.000 (50% off untuk 20 pendaftar pertama).</p></div></div>
+          <div class="rstep"><div class="rstep-num">4</div><div class="rstep-body"><h4>Akses LMS &amp; Welcome Kit</h4><p>Terima akses platform dan paket eksklusif Anda.</p></div></div>
+        </div>
       </div>
-      <div class="form-card fade-in fade-in-delay-1">
-        <div class="form-title">Formulir Pendaftaran PKPA</div>
+      <div class="form-box fi d1">
+        <h3>Formulir Pendaftaran PKPA</h3>
+        <p class="form-sub">Semua field wajib diisi. Pendaftaran gratis — tidak ada biaya di tahap ini.</p>
         <form id="regForm" novalidate>
-          <div class="form-group">
-            <label class="form-label" for="fullName">Nama Lengkap (sesuai KTP)</label>
-            <input class="form-input" type="text" id="fullName" name="fullName" placeholder="Contoh: Budi Santoso, S.H." />
-            <div class="form-error" id="err-fullName">Nama lengkap wajib diisi.</div>
+          <div class="fg"><label class="fl" for="fn">Nama Lengkap (sesuai KTP)</label><input class="fi-in" type="text" id="fn" placeholder="Contoh: Budi Santoso, S.H."/><div class="ferr" id="fe-fn">Nama lengkap wajib diisi.</div></div>
+          <div class="fg"><label class="fl" for="em">Email Aktif</label><input class="fi-in" type="email" id="em" placeholder="email@domain.com"/><div class="ferr" id="fe-em">Masukkan email yang valid.</div></div>
+          <div class="fg"><label class="fl" for="ph">Nomor HP / WhatsApp</label><input class="fi-in" type="tel" id="ph" placeholder="08xxxxxxxxxx"/><div class="ferr" id="fe-ph">Nomor HP wajib diisi (min. 10 digit).</div></div>
+          <div class="fg">
+            <label class="fl" for="cat">Kategori Peserta</label>
+            <div class="fsel-w"><select class="fi-sel" id="cat">
+              <option value="">-- Pilih Kategori --</option>
+              <option value="umum">Umum — Rp 5.999.000</option>
+              <option value="uin">Alumni UIN — Rp 4.999.000</option>
+            </select></div>
+            <div class="ferr" id="fe-cat">Pilih kategori peserta.</div>
           </div>
-          <div class="form-group">
-            <label class="form-label" for="email">Alamat Email Aktif</label>
-            <input class="form-input" type="email" id="email" name="email" placeholder="email@domain.com" />
-            <div class="form-error" id="err-email">Masukkan alamat email yang valid.</div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="phone">Nomor HP / WhatsApp</label>
-            <input class="form-input" type="tel" id="phone" name="phone" placeholder="08xxxxxxxxxx" />
-            <div class="form-error" id="err-phone">Nomor HP wajib diisi (minimal 10 digit).</div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="batch">Pilih Batch</label>
-            <div class="form-select-wrap">
-              <select class="form-select" id="batch" name="batch">
-                <option value="">-- Pilih Batch --</option>
-                <option value="batch6">Batch 06 — Mei s/d Juli 2025</option>
-                <option value="batch7">Batch 07 — Agustus s/d Oktober 2025</option>
-              </select>
-            </div>
-            <div class="form-error" id="err-batch">Pilih batch yang Anda inginkan.</div>
-          </div>
-          <button type="submit" class="form-submit">Kirim Pendaftaran →</button>
+          <div class="price-preview" id="pricePreview">Biaya program Anda: <strong id="priceVal"></strong></div>
+          <button type="submit" class="fsub">Kirim Pendaftaran →</button>
         </form>
-        <div class="form-success" id="formSuccess">
-          <div class="form-success-icon">✅</div>
+        <div class="form-ok" id="formOk">
+          <div class="form-ok-icon">🎉</div>
           <h3>Pendaftaran Terkirim!</h3>
-          <p>Terima kasih, <strong id="successName"></strong>. Tim Lex Master Academy akan menghubungi Anda melalui WhatsApp/email dalam 1×24 jam hari kerja.</p>
+          <p>Terima kasih, <strong id="okName"></strong>!<br/>Tim Lex Master Academy akan menghubungi Anda dalam 1×24 jam hari kerja via WhatsApp/email.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ────────────────────────────────────────────────── -->
+<!-- FOOTER -->
 <footer id="footer">
   <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="#hero" class="nav-logo" style="margin-bottom: 16px; display: inline-flex;">
-          <span class="nav-logo-icon">L</span>
-          Lex Master Academy
+    <div class="footer-grid">
+      <div>
+        <a href="#hero" class="flogo">
+          <div class="flogo-icon"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="34" height="34"><rect width="40" height="40" rx="8" fill="#F8C826"/><text x="20" y="27" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-weight="900" font-size="18" fill="#2f3d82">L</text></svg></div>
+          <span class="flogo-text">Lex Master Academy</span>
         </a>
-        <p>Lembaga pendidikan hukum profesi terpercaya yang menyelenggarakan PKPA resmi Peradi secara penuh daring untuk mencetak advokat-advokat profesional Indonesia.</p>
-        <div class="footer-socials">
-          <a href="#" class="social-btn" aria-label="Instagram" title="Instagram">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        <p class="fabout">Lembaga pendidikan hukum profesi yang menyelenggarakan PKPA resmi Peradi secara full online. Mencetak advokat profesional Indonesia.</p>
+        <div class="fsocs">
+          <a href="https://instagram.com/lexmaster.academy" class="fsoc" title="Instagram" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           </a>
-          <a href="#" class="social-btn" aria-label="WhatsApp" title="WhatsApp">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          </a>
-          <a href="#" class="social-btn" aria-label="LinkedIn" title="LinkedIn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          <a href="mailto:Lexacademy.ind@gmail.com" class="fsoc" title="Email">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
           </a>
         </div>
       </div>
-      <div class="footer-col">
+      <div class="fcol">
         <h4>Navigasi</h4>
-        <ul class="footer-links">
+        <ul class="flist">
           <li><a href="#why">Keunggulan</a></li>
           <li><a href="#curriculum">Kurikulum</a></li>
           <li><a href="#instructors">Pengajar</a></li>
-          <li><a href="#schedule">Jadwal & Batch</a></li>
-          <li><a href="#fee">Biaya Investasi</a></li>
+          <li><a href="#schedule">Jadwal</a></li>
+          <li><a href="#fee">Biaya</a></li>
           <li><a href="#register">Daftar Sekarang</a></li>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4>Kontak Kami</h4>
-        <ul class="footer-links">
-          <li><a href="mailto:info@lexmasteracademy.id">info@lexmasteracademy.id</a></li>
-          <li><a href="tel:+6221-1234-5678">+62 21 1234 5678</a></li>
-          <li><a href="#">WhatsApp: +62 812-3456-7890</a></li>
-          <li style="color: rgba(255,255,255,0.4); font-size: 0.85rem; margin-top: 8px;">Jl. Sudirman Kav. 52-53<br/>Jakarta Selatan, DKI Jakarta 12190</li>
+      <div class="fcol">
+        <h4>Kontak</h4>
+        <ul class="flist">
+          <li><a href="mailto:Lexacademy.ind@gmail.com">Lexacademy.ind@gmail.com</a></li>
+          <li><a href="https://instagram.com/lexmaster.academy" target="_blank" rel="noopener">@lexmaster.academy</a></li>
+          <li><a href="https://lexacademy.id">lexacademy.id</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2025 Lex Master Academy. Hak cipta dilindungi undang-undang.</span>
-      <span>Program PKPA Resmi Peradi · Izin Penyelenggaraan No. 001/PKPA/DPN-PERADI/2025</span>
+    <div class="fbottom">
+      <span>© 2026 Lex Master Academy. All rights reserved.</span>
+      <span>Program PKPA Resmi Peradi · lexacademy.id</span>
     </div>
   </div>
 </footer>
 
 <script>
-  /* ── NAVBAR SCROLL ──────────────────────────────── */
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>nav.classList.toggle('sc',window.scrollY>50));
+  const hbg=document.getElementById('hbg'),mob=document.getElementById('mob'),mobx=document.getElementById('mobx');
+  hbg.addEventListener('click',()=>mob.classList.add('open'));
+  mobx.addEventListener('click',()=>mob.classList.remove('open'));
+  mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mob.classList.remove('open')));
+  const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target)}}),{threshold:.1});
+  document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+  // price preview
+  const cat=document.getElementById('cat'),pp=document.getElementById('pricePreview'),pv=document.getElementById('priceVal');
+  cat.addEventListener('change',()=>{
+    if(cat.value==='umum'){pv.textContent='Rp 5.999.000';pp.classList.add('show')}
+    else if(cat.value==='uin'){pv.textContent='Rp 4.999.000';pp.classList.add('show')}
+    else pp.classList.remove('show');
   });
-
-  /* ── MOBILE MENU ────────────────────────────────── */
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const mobileClose = document.getElementById('mobileClose');
-  const mobileLinks = document.querySelectorAll('.mobile-link, .mobile-menu .btn');
-
-  hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
-  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
-  mobileLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.remove('open')));
-
-  /* ── INTERSECTION OBSERVER FADE-IN ─────────────── */
-  const fadeEls = document.querySelectorAll('.fade-in');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  fadeEls.forEach(el => observer.observe(el));
-
-  /* ── FORM VALIDATION ────────────────────────────── */
-  const form = document.getElementById('regForm');
-  const formSuccess = document.getElementById('formSuccess');
-
-  function showError(id, show) {
-    const el = document.getElementById('err-' + id);
-    const input = document.getElementById(id);
-    if (show) {
-      el.classList.add('show');
-      input.classList.add('error');
-    } else {
-      el.classList.remove('show');
-      input.classList.remove('error');
-    }
-  }
-
-  form.addEventListener('submit', (e) => {
+  // form
+  const form=document.getElementById('regForm'),formOk=document.getElementById('formOk');
+  function setE(id,show){document.getElementById('fe-'+id).classList.toggle('show',show);document.getElementById(id).classList.toggle('e',show)}
+  form.addEventListener('submit',e=>{
     e.preventDefault();
-    let valid = true;
-
-    const fullName = document.getElementById('fullName').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const batch = document.getElementById('batch').value;
-
-    if (!fullName) { showError('fullName', true); valid = false; } else { showError('fullName', false); }
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email', true); valid = false; } else { showError('email', false); }
-    if (!phone || phone.replace(/\D/g,'').length < 10) { showError('phone', true); valid = false; } else { showError('phone', false); }
-    if (!batch) { showError('batch', true); valid = false; } else { showError('batch', false); }
-
-    if (valid) {
-      form.style.display = 'none';
-      document.getElementById('successName').textContent = fullName;
-      formSuccess.classList.add('show');
-    }
+    const fn=document.getElementById('fn').value.trim();
+    const em=document.getElementById('em').value.trim();
+    const ph=document.getElementById('ph').value.trim();
+    const ct=document.getElementById('cat').value;
+    let ok=true;
+    if(!fn){setE('fn',true);ok=false}else setE('fn',false);
+    if(!em||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){setE('em',true);ok=false}else setE('em',false);
+    if(!ph||ph.replace(/\D/g,'').length<10){setE('ph',true);ok=false}else setE('ph',false);
+    if(!ct){setE('cat',true);ok=false}else setE('cat',false);
+    if(ok){form.style.display='none';document.getElementById('okName').textContent=fn;formOk.classList.add('show')}
   });
-
-  /* Remove error on input */
-  ['fullName','email','phone','batch'].forEach(id => {
-    const el = document.getElementById(id);
-    el.addEventListener('input', () => showError(id, false));
-    el.addEventListener('change', () => showError(id, false));
-  });
+  ['fn','em','ph','cat'].forEach(id=>{const el=document.getElementById(id);['input','change'].forEach(ev=>el.addEventListener(ev,()=>setE(id,false)))});
 </script>
 </body>
 </html>
