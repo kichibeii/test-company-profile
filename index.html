@@ -626,6 +626,7 @@
   // form
   const form=document.getElementById('regForm'),formOk=document.getElementById('formOk');
   function setE(id,show){document.getElementById('fe-'+id).classList.toggle('show',show);document.getElementById(id).classList.toggle('e',show)}
+  const SCRIPT_URL='https://script.google.com/macros/s/AKfycby3KvMa65U_wX6T_X0xqGV3kwx5Nzy10Tdxt1--wL2YVMs7BuzS0Wmeoedr4ZaZ5E8S/exec';
   form.addEventListener('submit',e=>{
     e.preventDefault();
     const fn=document.getElementById('fn').value.trim();
@@ -637,7 +638,24 @@
     if(!em||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){setE('em',true);ok=false}else setE('em',false);
     if(!ph||ph.replace(/\D/g,'').length<10){setE('ph',true);ok=false}else setE('ph',false);
     if(!ct){setE('cat',true);ok=false}else setE('cat',false);
-    if(ok){form.style.display='none';document.getElementById('okName').textContent=fn;formOk.classList.add('show')}
+    if(!ok)return;
+    const btn=form.querySelector('.fsub');
+    btn.textContent='Mengirim...';
+    btn.disabled=true;
+    fetch(SCRIPT_URL,{
+      method:'POST',
+      body:JSON.stringify({nama:fn,email:em,hp:ph,kategori:ct}),
+    })
+    .then(()=>{
+      form.style.display='none';
+      document.getElementById('okName').textContent=fn;
+      formOk.classList.add('show');
+    })
+    .catch(()=>{
+      form.style.display='none';
+      document.getElementById('okName').textContent=fn;
+      formOk.classList.add('show');
+    });
   });
   ['fn','em','ph','cat'].forEach(id=>{const el=document.getElementById(id);['input','change'].forEach(ev=>el.addEventListener(ev,()=>setE(id,false)))});
 </script>
